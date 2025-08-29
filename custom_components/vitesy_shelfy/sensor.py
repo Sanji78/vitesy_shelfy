@@ -200,7 +200,7 @@ class VitesySensor(CoordinatorEntity, SensorEntity):
         self._attr_native_unit_of_measurement = SENSOR_TYPES[sensor_type]["unit"]
         self._attr_device_class = SENSOR_TYPES[sensor_type]["device_class"]
         self._attr_icon = SENSOR_TYPES[sensor_type].get("icon")
-        self._attr_translation_key = sensor_type.replace("_","-")
+        self._attr_translation_key = sensor_type.replace("_","-").lower()
         self._attr_has_entity_name = True
 
     @property

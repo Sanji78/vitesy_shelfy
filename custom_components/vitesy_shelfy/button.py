@@ -27,7 +27,7 @@ class VitesyResetFilterButton(CoordinatorEntity, ButtonEntity):
         self.device_id_orig = device_id_orig
         self.device_type = device_type
         self._attr_unique_id = f"vitesy_{device_type.lower()}_{device_id}_filter_washed"
-        self._attr_translation_key = "filter_washed"
+        self._attr_translation_key = "filter-washed"
         self._attr_has_entity_name = True
 
     @property
@@ -56,7 +56,7 @@ class VitesyResetFridgeButton(CoordinatorEntity, ButtonEntity):
         self.device_id_orig = device_id_orig
         self.device_type = device_type
         self._attr_unique_id = f"vitesy_{device_type.lower()}_{device_id}_fridge_washed"
-        self._attr_translation_key = "fridge_washed"
+        self._attr_translation_key = "fridge-washed"
         self._attr_has_entity_name = True
 
     @property

@@ -15,7 +15,7 @@
       "battery": { "name": "Livello Batteria" },
       "type": { "name": "Tipo" },
       "model": { "name": "Modello" },
-      "firmware_version": { "name": "Versione Firmware" },
+      "firmware-version": { "name": "Versione Firmware" },
       "wifi-SSID": { "name": "SSID WiFi" },
       "connected": { "name": "Connesso" },
       "charging": { "name": "In Carica" },
@@ -35,10 +35,10 @@
       "fridgedays": { "name": "Giorni alla Pulizia Frigo" }
     },
     "button": {
-      "filter_washed": {
+      "filter-washed": {
         "name": "Ho già lavato il filtro"
       },
-      "fridge_washed": {
+      "fridge-washed": {
         "name": "Ho già pulito il mio frigorifero"
       }	  
     }	

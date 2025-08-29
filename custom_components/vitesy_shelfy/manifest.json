@@ -1,13 +1,13 @@
 {
   "domain": "vitesy_shelfy",
   "name": "Vitesy Shelfy",
-  "version": "1.0.0",
-  "documentation": "https://github.com/Sanji78/vitesy_shelfy",
-  "issue_tracker": "https://github.com/Sanji78/vitesy_shelfy/issues",
-  "requirements": [],
-  "dependencies": [],
   "codeowners": ["@Sanji78"],
   "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Sanji78/vitesy_shelfy",
   "iot_class": "cloud_polling",
-  "loggers": ["custom_components.vitesy_shelfy"]
+  "issue_tracker": "https://github.com/Sanji78/vitesy_shelfy/issues",
+  "loggers": ["custom_components.vitesy_shelfy"],
+  "requirements": [],
+  "version": "1.0.0"
 }

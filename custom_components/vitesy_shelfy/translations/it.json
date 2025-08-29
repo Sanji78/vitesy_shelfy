@@ -1,0 +1,46 @@
+{
+  "title": "Vitesy",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Collega il tuo account Vitesy",
+        "description": "Inserisci le tue credenziali di accesso"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "id": { "name": "Indirizzo MAC" },
+	  "apikey": { "name": "Chiave API" },
+      "battery": { "name": "Livello Batteria" },
+      "type": { "name": "Tipo" },
+      "model": { "name": "Modello" },
+      "firmware_version": { "name": "Versione Firmware" },
+      "wifi_SSID": { "name": "SSID WiFi" },
+      "connected": { "name": "Connesso" },
+      "charging": { "name": "In Carica" },
+      "TMP01-SY": { "name": "Temperatura Frigo" },
+      "DOC-SY": { "name": "Numero Aperture Porta" },
+      "DOT-SY": { "name": "Durata Apertura Porta" },
+      "score": { "name": "Indice Qualità Aria" },
+      "timestamp": { "name": "Ultimo Aggiornamento" },
+      "program": { "name": "Programma" },
+      "programdescription": { "name": "Descrizione Programma" },
+      "programicon": { "name": "Icona Programma" },
+      "programfan": { "name": "Velocità Ventola" },
+      "programpower": { "name": "Potenza" },
+      "filter": { "name": "Prossima Pulizia Filtro" },
+      "fridge": { "name": "Prossima Pulizia Frigo" },
+      "filterdays": { "name": "Giorni alla Pulizia Filtro" },
+      "fridgedays": { "name": "Giorni alla Pulizia Frigo" }
+    },
+    "button": {
+      "filter_washed": {
+        "name": "Ho già lavato il filtro"
+      },
+      "fridge_washed": {
+        "name": "Ho già pulito il mio frigorifero"
+      }	  
+    }	
+  }
+}

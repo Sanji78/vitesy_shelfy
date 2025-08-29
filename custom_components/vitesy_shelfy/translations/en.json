@@ -1,0 +1,46 @@
+{
+  "title": "Vitesy",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect your Vitesy account",
+        "description": "Enter your login credentials"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "id": { "name": "Mac Address" },
+	  "apikey": { "name": "API Key" },
+      "battery": { "name": "Battery Level" },
+      "type": { "name": "Type" },
+      "model": { "name": "Model" },
+      "firmware_version": { "name": "Firmware Version" },
+      "wifi_SSID": { "name": "WiFi SSID" },
+      "connected": { "name": "Connected" },
+      "charging": { "name": "Charging" },
+      "TMP01-SY": { "name": "Fridge Temperature" },
+      "DOC-SY": { "name": "Door Opening Times" },
+      "DOT-SY": { "name": "Door Opening Seconds" },
+      "score": { "name": "Air Quality Score" },
+      "timestamp": { "name": "Last Update" },
+      "program": { "name": "Program" },
+      "programdescription": { "name": "Program Description" },
+      "programicon": { "name": "Program Icon" },
+      "programfan": { "name": "Program Fan" },
+      "programpower": { "name": "Program Power" },
+      "filter": { "name": "Next Filter Cleaning Date" },
+      "fridge": { "name": "Next Fridge Cleaning Date" },
+      "filterdays": { "name": "Remaining Filter Cleaning Days" },
+      "fridgedays": { "name": "Remaining Fridge Cleaning Days" }
+    },
+    "button": {
+      "filter_washed": {
+        "name": "I already washed the filter"
+      },
+      "fridge_washed": {
+        "name": "I already cleaned my fridge"
+      }		  
+    }	
+  }
+}

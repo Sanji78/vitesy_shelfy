@@ -78,7 +78,7 @@ PRs and issues are welcome. Please open an issue with logs if you hit a bug.
 
 ## ❤️ Donate
 If this project helps you, consider buying me a coffee:  
-**[PayPal](https://www.paypal.me/elenacapasso80)** (replace with your preferred link).
+**[PayPal](https://www.paypal.me/elenacapasso80)**.
 
 ---
 

@@ -9,6 +9,5 @@
   "codeowners": ["@Sanji78"],
   "config_flow": true,
   "iot_class": "cloud_polling",
-  "loggers": ["custom_components.vitesy_shelfy"],
-  "translations": ["it","en"]
+  "loggers": ["custom_components.vitesy_shelfy"]
 }

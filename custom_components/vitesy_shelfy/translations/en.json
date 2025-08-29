@@ -16,7 +16,7 @@
       "type": { "name": "Type" },
       "model": { "name": "Model" },
       "firmware_version": { "name": "Firmware Version" },
-      "wifi_SSID": { "name": "WiFi SSID" },
+      "wifi-SSID": { "name": "WiFi SSID" },
       "connected": { "name": "Connected" },
       "charging": { "name": "Charging" },
       "TMP01-SY": { "name": "Fridge Temperature" },

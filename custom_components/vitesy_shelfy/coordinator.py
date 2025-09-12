@@ -25,7 +25,7 @@ class VitesyDataUpdateCoordinator(DataUpdateCoordinator):
                 device_id = device["id"]
                 device_type = device["type"]
                 firmware_version = device["firmware_version"]
-                device["apikey"] = await self._get_or_create_api_key()
+                # device["apikey"] = await self._get_or_create_api_key()
                 device["measurements"] = await self._get_measurements(device_id)
                 device["maintenancehistory"] = await self._get_maintenance(device_id)
                 device["programs"] = await self._get_programs(device_type, firmware_version)
@@ -45,5 +45,5 @@ class VitesyDataUpdateCoordinator(DataUpdateCoordinator):
     async def _get_programs(self, device_type, firmware_version):
         return await self.hass.async_add_executor_job(self.api.get_programs, device_type, firmware_version)
 
-    async def _get_or_create_api_key(self):
-        return await self.hass.async_add_executor_job(self.api.get_or_create_api_key)
+    # async def _get_or_create_api_key(self):
+        # return await self.hass.async_add_executor_job(self.api.get_or_create_api_key)

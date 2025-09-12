@@ -9,5 +9,5 @@
   "issue_tracker": "https://github.com/Sanji78/vitesy_shelfy/issues",
   "loggers": ["custom_components.vitesy_shelfy"],
   "requirements": [],
-  "version": "1.0.2"
+  "version": "1.0.3"
 }

@@ -7,7 +7,10 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
-SENSOR_TYPES = {
+def extend_shared(extra: dict) -> dict:
+    return {**SHARED_SENSOR_TYPES, **extra}
+
+SHARED_SENSOR_TYPES = {
     "id": {
         "name": "Mac Address",
         "unit": None,
@@ -19,11 +22,6 @@ SENSOR_TYPES = {
         "unit": None,
         "device_class": None,
         "icon": "mdi:key-variant",
-    },
-    "battery": {
-        "name": "Battery Level",
-        "unit": PERCENTAGE,
-        "device_class": "battery",
     },
     "type": {
         "name": "Type",
@@ -55,6 +53,43 @@ SENSOR_TYPES = {
         "device_class": None,
         "icon": "mdi:connection",
     },
+    "score": {
+        "name": "Air Quality Score",
+        "unit": "%",
+        "device_class": None,
+        "icon": "mdi:air-filter",
+    },
+    "timestamp": {
+        "name": "Last Update",
+        "unit": None,
+        "device_class": SensorDeviceClass.TIMESTAMP,
+    },
+    "program": {
+        "name": "Program",
+        "unit": None,
+        "device_class": None,
+        "icon": "mdi:play-circle",
+    },
+    "programdescription": {
+        "name": "Program Description",
+        "unit": None,
+        "device_class": None,
+        "icon": "mdi:text-box-outline",
+    },
+    "programicon": {
+        "name": "Program Icon",
+        "unit": None,
+        "device_class": None,
+        "icon": "mdi:image-outline",
+    },
+}
+
+SHELFY_SENSOR_TYPES = extend_shared({
+    "battery": {
+        "name": "Battery Level",
+        "unit": PERCENTAGE,
+        "device_class": "battery",
+    },
     "charging": {
         "name": "Charging",
         "unit": None,
@@ -77,36 +112,12 @@ SENSOR_TYPES = {
         "unit": "s",
         "device_class": None,
         "icon": "mdi:timer",
-    },
-    "score": {
-        "name": "Air Quality Score",
-        "unit": "%",
-        "device_class": None,
-        "icon": "mdi:air-filter",
     }, 
     "timestamp": {
         "name": "Last Update",
         "unit": None,
         "device_class": SensorDeviceClass.TIMESTAMP,
     },      
-    "program": {
-        "name": "Program",
-        "unit": None,
-        "device_class": None,
-        "icon": "mdi:play-circle",
-    },     
-    "programdescription": {
-        "name": "Program Description",
-        "unit": None,
-        "device_class": None,
-        "icon": "mdi:text-box-outline",
-    },     
-    "programicon": {
-        "name": "Program Icon",
-        "unit": None,
-        "device_class": None,
-        "icon": "mdi:image-outline",
-    },     
     "programfan": {
         "name": "Program Fan",
         "unit": None,
@@ -142,8 +153,36 @@ SENSOR_TYPES = {
         "unit": None,
         "device_class": None,
         "icon": "mdi:calendar-minus",
-    },     
-}
+    },
+})
+
+NATEDE_SENSOR_TYPES = extend_shared({
+    "TD01TP-N2": {
+        "name": "Temperature",
+        "unit": UnitOfTemperature.CELSIUS,
+        "device_class":  SensorDeviceClass.TEMPERATURE,
+    },
+    "SN01HU-N2": {
+        "name": "Humidity",
+        "unit": PERCENTAGE,
+        "device_class": SensorDeviceClass.HUMIDITY
+    },
+    "SN02VD-N2": {
+        "name": "VOC",
+        "unit": "ppm",
+        "device_class": SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS
+    },
+    "SN02C2-N2": {
+        "name": "CO2",
+        "unit": "ppm",
+        "device_class": SensorDeviceClass.CO2
+    },
+    "SY01DS-N2": {
+        "name": "PM2.5",
+        "unit": "µg/m³",
+        "device_class": SensorDeviceClass.PM25
+    },
+})
 
 async def async_setup_entry(hass, entry, async_add_entities):
     coordinator = hass.data[DOMAIN][entry.entry_id]
@@ -152,54 +191,55 @@ async def async_setup_entry(hass, entry, async_add_entities):
     for device in coordinator.data:
         device_id = device["id"].replace(":", "")
         device_type = device.get("type", "Unknown").capitalize()
+        sensor_types = NATEDE_SENSOR_TYPES if "NATEDE" in device_type.upper() else SHELFY_SENSOR_TYPES
 
         # Add flat sensors like battery, type, etc.
-        for sensor_type in SENSOR_TYPES:
+        for sensor_type in sensor_types:
             if sensor_type in device and sensor_type != "program": 
-                entities.append(VitesySensor(coordinator, device_id, device_type, sensor_type))
+                entities.append(VitesySensor(coordinator, device_id, device_type, sensor_type, sensor_types))
             elif "battery" in device and sensor_type in device["battery"]:                
-                entities.append(VitesySensor(coordinator, device_id, device_type, sensor_type))
+                entities.append(VitesySensor(coordinator, device_id, device_type, sensor_type, sensor_types))
             elif "program" in device and sensor_type in device and sensor_type == "program":
-                entities.append(VitesySensor(coordinator, device_id, device_type, sensor_type))
-                entities.append(VitesySensor(coordinator, device_id, device_type, "programdescription"))
-                entities.append(VitesySensor(coordinator, device_id, device_type, "programicon"))
-                entities.append(VitesySensor(coordinator, device_id, device_type, "programfan"))
-                entities.append(VitesySensor(coordinator, device_id, device_type, "programpower"))
+                entities.append(VitesySensor(coordinator, device_id, device_type, sensor_type, sensor_types))
+
+                for extra_key in ["programdescription", "programicon", "programfan", "programpower"]:
+                    if extra_key in sensor_types:
+                        entities.append(VitesySensor(coordinator, device_id, device_type, extra_key, sensor_types))
 
         # Add from measurements
         if "measurements" in device and isinstance(device["measurements"], list) and device["measurements"]:
             latest_measurement = device["measurements"][0]
             for key in latest_measurement:
-                if key in SENSOR_TYPES and key!="id":
-                    entities.append(VitesySensor(coordinator, device_id, device_type, key))
-
+                if key in sensor_types and key!="id":
+                    entities.append(VitesySensor(coordinator, device_id, device_type, key, sensor_types))
 
         # Add from measurements -> sensors_data[].id
         for measurement in device.get("measurements", []):
             for sensor in measurement.get("sensors_data", []):
                 sensor_id = sensor.get("id")
-                if sensor_id in SENSOR_TYPES:
-                    entities.append(VitesySensor(coordinator, device_id, device_type, sensor_id))
+                if sensor_id in sensor_types:
+                    entities.append(VitesySensor(coordinator, device_id, device_type, sensor_id, sensor_types))
 
         #  Add from maintenance
         for maintenance_key in device.get("maintenance", {}):
-            if maintenance_key in SENSOR_TYPES:
-                entities.append(VitesySensor(coordinator, device_id, device_type, maintenance_key))
-                entities.append(VitesySensor(coordinator, device_id, device_type, maintenance_key+"days"))
+            if maintenance_key in sensor_types:
+                entities.append(VitesySensor(coordinator, device_id, device_type, maintenance_key, sensor_types))
+                entities.append(VitesySensor(coordinator, device_id, device_type, maintenance_key+"days", sensor_types))
 
     async_add_entities(entities)
 
 
 class VitesySensor(CoordinatorEntity, SensorEntity):
-    def __init__(self, coordinator, device_id, device_type, sensor_type):
+    def __init__(self, coordinator, device_id, device_type, sensor_type, sensor_types):
         super().__init__(coordinator)
         self.device_id = device_id
         self.sensor_type = sensor_type
         self.device_type = device_type
+        self._sensor_types = sensor_types
         self._attr_unique_id = f"vitesy_{device_type.lower()}_{device_id}_{sensor_type}"
-        self._attr_native_unit_of_measurement = SENSOR_TYPES[sensor_type]["unit"]
-        self._attr_device_class = SENSOR_TYPES[sensor_type]["device_class"]
-        self._attr_icon = SENSOR_TYPES[sensor_type].get("icon")
+        self._attr_native_unit_of_measurement = self._sensor_types[sensor_type]["unit"]
+        self._attr_device_class = self._sensor_types[sensor_type]["device_class"]
+        self._attr_icon = self._sensor_types[sensor_type].get("icon")
         self._attr_translation_key = sensor_type.replace("_","-").lower()
         self._attr_has_entity_name = True
 
@@ -279,6 +319,7 @@ class VitesySensor(CoordinatorEntity, SensorEntity):
                 return device["program"]["data"].get("metadata", {}).get("power")
             else:
                 return _get_program_metadata_field(device, "power")
+
         # Case: Flat attributes
         if self.sensor_type in device:
             return device[self.sensor_type]
@@ -286,14 +327,14 @@ class VitesySensor(CoordinatorEntity, SensorEntity):
         # Case: From measurements
         measurements = device.get("measurements", [])
         if measurements and self.sensor_type in measurements[0]:
-            if self.sensor_type=="score":
-                return round(measurements[0][self.sensor_type]*100)
-            elif self.sensor_type=="timestamp":
+            if self.sensor_type == "score":
+                return round(measurements[0][self.sensor_type] * 100)
+            elif self.sensor_type == "timestamp":
                 try:
                     return datetime.fromisoformat(measurements[0][self.sensor_type].replace("Z", "+00:00"))
                 except (KeyError, ValueError):
                     return None                
-            elif self.sensor_type!="id":
+            elif self.sensor_type != "id":
                 return measurements[0][self.sensor_type]
 
         # Case: From measurements → sensors_data[]
@@ -308,11 +349,14 @@ class VitesySensor(CoordinatorEntity, SensorEntity):
                 return datetime.fromisoformat(device["maintenance"][self.sensor_type].get("due_date").replace("Z", "+00:00"))
             except (KeyError, ValueError):
                 return None                
-        if self.sensor_type.replace("days","") in device.get("maintenance", {}):
+        if self.sensor_type.replace("days", "") in device.get("maintenance", {}):
             try:
-                return (datetime.fromisoformat(device["maintenance"][self.sensor_type.replace("days","")].get("due_date").replace("Z", "+00:00"))-datetime.now(timezone.utc)).days
+                return (
+                    datetime.fromisoformat(
+                        device["maintenance"][self.sensor_type.replace("days", "")].get("due_date").replace("Z", "+00:00")
+                    ) - datetime.now(timezone.utc)
+                ).days
             except (KeyError, ValueError):
                 return None                
 
         return None
-

@@ -1,6 +1,12 @@
 from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
-from homeassistant.const import UnitOfTemperature, PERCENTAGE, UnitOfPressure
+from homeassistant.const import (
+    UnitOfTemperature,
+    PERCENTAGE,
+    UnitOfPressure,
+    CONCENTRATION_PARTS_PER_MILLION,
+    CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
+)
 from .const import DOMAIN
 from datetime import datetime, timezone
 import logging
@@ -169,17 +175,17 @@ NATEDE_SENSOR_TYPES = extend_shared({
     },
     "SN02VD-N2": {
         "name": "VOC",
-        "unit": "ppm",
-        "device_class": SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
+        "device_class": SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS
     },
     "SN02C2-N2": {
         "name": "CO2",
-        "unit": "ppm",
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
         "device_class": SensorDeviceClass.CO2
     },
     "SY01DS-N2": {
         "name": "PM2.5",
-        "unit": "µg/m³",
+        "unit": CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
         "device_class": SensorDeviceClass.PM25
     },
 })

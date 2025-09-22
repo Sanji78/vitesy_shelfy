@@ -32,7 +32,7 @@ This custom integration logs in to **Vitesy Hub** cloud, pulls device status and
 1. Make sure you have [HACS](https://hacs.xyz/) installed in Home Assistant.
 2. In Home Assistant: **HACS → Integrations → ⋮ (three dots) → Custom repositories**.  
    Add `https://github.com/Sanji78/vitesy_shelfy` as **Category: Integration**.
-3. Find **Vitesy Shelfy** in HACS and click **Download**.
+3. Find **Vitesy Shelfy & Natede** in HACS and click **Download**.
 4. **Restart** Home Assistant.
 
 ### Option B — Manual
@@ -45,7 +45,7 @@ This custom integration logs in to **Vitesy Hub** cloud, pulls device status and
 ## ⚙️ Configuration
 
 1. Home Assistant → **Settings → Devices & services → Add Integration**.
-2. Search for **Vitesy Shelfy**.
+2. Search for **Vitesy Shelfy & Natede**.
 3. Enter your **Vitesy email and password**.
 4. On success, entities will be created for each device.
 

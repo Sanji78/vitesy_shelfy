@@ -1,6 +1,6 @@
-# Vitesy Shelfy (Home Assistant Custom Integration)
+# Vitesy Shelfy & Natede (Home Assistant Custom Integration)
 
-Monitor and control your **Vitesy Shelfy** devices from Home Assistant.  
+Monitor and control your **Vitesy Shelfy & Natede** devices from Home Assistant.  
 This custom integration logs in to **Vitesy Hub** cloud, pulls device status and measurements, and exposes them as sensors and buttons in HA.
 
 [![Validate with HACS](https://img.shields.io/badge/HACS-validated-41BDF5)](https://hacs.xyz/) 

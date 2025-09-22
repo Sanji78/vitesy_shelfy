@@ -14,8 +14,10 @@ async def async_setup_entry(hass, entry, async_add_entities):
         device_id = device["id"].replace(":", "")
         device_id_orig = device["id"]
         device_type = device.get("type", "Unknown").capitalize()
-        entities.append(VitesyResetFilterButton(coordinator, device_id, device_id_orig, device_type))
-        entities.append(VitesyResetFridgeButton(coordinator, device_id, device_id_orig, device_type))
+
+        if device_type == "Shelfy":
+            entities.append(VitesyResetFilterButton(coordinator, device_id, device_id_orig, device_type))
+            entities.append(VitesyResetFridgeButton(coordinator, device_id, device_id_orig, device_type))
 
     async_add_entities(entities, True)
 

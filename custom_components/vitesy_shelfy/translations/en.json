@@ -11,7 +11,7 @@
   "entity": {
     "sensor": {
       "id": { "name": "Mac Address" },
-	  "apikey": { "name": "API Key" },
+      "apikey": { "name": "API Key" },
       "battery": { "name": "Battery Level" },
       "type": { "name": "Type" },
       "model": { "name": "Model" },
@@ -22,6 +22,11 @@
       "tmp01-sy": { "name": "Fridge Temperature" },
       "doc-sy": { "name": "Door Opening Times" },
       "dot-sy": { "name": "Door Opening Seconds" },
+      "td01tp-n2": { "name": "Temperature" },
+      "sn01hu-n2": { "name": "Humidity" },
+      "sn02vd-n2": { "name": "VOC" },
+      "sn02c2-n2": { "name": "CO2" },
+      "sy01ds-n2": { "name": "PM2.5" },
       "score": { "name": "Air Quality Score" },
       "timestamp": { "name": "Last Update" },
       "program": { "name": "Program" },

@@ -190,6 +190,29 @@ NATEDE_SENSOR_TYPES = extend_shared({
     },
 })
 
+ETERIA_SENSOR_TYPES = extend_shared({
+    "SN01TP-E0": {
+        "name": "Temperature",
+        "unit": UnitOfTemperature.CELSIUS,
+        "device_class":  SensorDeviceClass.TEMPERATURE,
+    },
+    "SN01HU-E0": {
+        "name": "Humidity",
+        "unit": PERCENTAGE,
+        "device_class": SensorDeviceClass.HUMIDITY
+    },
+    "SN02VD-E0": {
+        "name": "VOC",
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
+        "device_class": SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS
+    },
+    "SN02C2-E0": {
+        "name": "CO2",
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
+        "device_class": SensorDeviceClass.CO2
+    },
+})
+
 async def async_setup_entry(hass, entry, async_add_entities):
     coordinator = hass.data[DOMAIN][entry.entry_id]
     entities = []
@@ -197,7 +220,12 @@ async def async_setup_entry(hass, entry, async_add_entities):
     for device in coordinator.data:
         device_id = device["id"].replace(":", "")
         device_type = device.get("type", "Unknown").capitalize()
-        sensor_types = NATEDE_SENSOR_TYPES if "NATEDE" in device_type.upper() else SHELFY_SENSOR_TYPES
+        if "NATEDE" in device_type.upper():
+	        sensor_types = NATEDE_SENSOR_TYPES
+        elif "ETERIA" in device_type.upper():
+	        sensor_types = ETERIA_SENSOR_TYPES
+        else:
+	        sensor_types = SHELFY_SENSOR_TYPES
 
         # Add flat sensors like battery, type, etc.
         for sensor_type in sensor_types:

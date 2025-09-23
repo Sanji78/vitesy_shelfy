@@ -1,0 +1,55 @@
+{
+  "title": "Vitesy",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Verbinde dein Vitesy Konto",
+        "description": "Gib deine Anmeldedaten ein"
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "id": { "name": "MAC-Adresse" },
+      "apikey": { "name": "API-Schlüssel" },
+      "battery": { "name": "Batteriestand" },
+      "type": { "name": "Typ" },
+      "model": { "name": "Modell" },
+      "firmware-version": { "name": "Firmware-Version" },
+      "wifi-ssid": { "name": "WLAN-SSID" },
+      "connected": { "name": "Verbunden" },
+      "charging": { "name": "Ladevorgang läuft" },
+      "tmp01-sy": { "name": "Kühlschranktemperatur" },
+      "doc-sy": { "name": "Anzahl Türöffnungen" },
+      "dot-sy": { "name": "Dauer Türöffnungen in Sekunden" },
+      "td01tp-n2": { "name": "Temperatur" },
+      "sn01hu-n2": { "Name": "Luftfeuchtigkeit" },
+      "sn02vd-n2": { "Name": "VOC" },
+      "sn02c2-n2": { "Name": "CO2" },
+      "sy01ds-n2": { "Name": "PM2,5" },
+      "sn01tp-e0": { "Name": "Temperatur" },
+      "sn01hu-e0": { "Name": "Luftfeuchtigkeit" },
+      "sn02vd-e0": { "Name": "VOC" },
+      "sn02c2-e0": { "Name": "CO2" },
+      "score": { "Name": "Luftqualitätswert" },
+      "timestamp": { "Name": "Letzte Aktualisierung" },
+      "program": { "Name": "Programm" },
+      "programdescription": { "name": "Programmbeschreibung" },
+      "programicon": { "name": "Programmsymbol" },
+      "programfan": { "name": "Lüfterprogramm" },
+      "programpower": { "name": "Leistungsprogramm" },
+      "filter": { "name": "Nächste Filterreinigung" },
+      "fridge": { "name": "Nächste Kühlschrankreinigung" },
+      "filterdays": { "name": "Verbleibende Tage bis zur Filterreinigung" },
+      "fridgedays": { "name": "Verbleibende Tage bis zur Kühlschrankreinigung" }
+    },
+    "button": {
+      "filter-washed": {
+        "name": "Ich habe den Filter bereits gewaschen" 
+      },
+      "fridge-washed": {
+        "name": "Ich habe meinen Kühlschrank bereits gereinigt"
+      }	  
+    }	
+  }
+}

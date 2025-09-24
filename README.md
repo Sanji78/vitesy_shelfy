@@ -1,6 +1,6 @@
-# Vitesy Shelfy & Natede (Home Assistant Custom Integration)
+# Vitesy Shelfy, Natede & Eteria (Home Assistant Custom Integration)
 
-Monitor and control your **Vitesy Shelfy & Natede** devices from Home Assistant.  
+Monitor and control your **Vitesy Shelfy, Natede & Eteria** devices from Home Assistant.  
 This custom integration logs in to **Vitesy Hub** cloud, pulls device status and measurements, and exposes them as sensors and buttons in HA.
 
 [![Validate with HACS](https://img.shields.io/badge/HACS-validated-41BDF5)](https://hacs.xyz/) 
@@ -32,7 +32,7 @@ This custom integration logs in to **Vitesy Hub** cloud, pulls device status and
 1. Make sure you have [HACS](https://hacs.xyz/) installed in Home Assistant.
 2. In Home Assistant: **HACS → Integrations → ⋮ (three dots) → Custom repositories**.  
    Add `https://github.com/Sanji78/vitesy_shelfy` as **Category: Integration**.
-3. Find **Vitesy Shelfy & Natede** in HACS and click **Download**.
+3. Find **Vitesy Shelfy, Natede & Eteria** in HACS and click **Download**.
 4. **Restart** Home Assistant.
 
 ### Option B — Manual
@@ -45,7 +45,7 @@ This custom integration logs in to **Vitesy Hub** cloud, pulls device status and
 ## ⚙️ Configuration
 
 1. Home Assistant → **Settings → Devices & services → Add Integration**.
-2. Search for **Vitesy Shelfy & Natede**.
+2. Search for **Vitesy Shelfy, Natede & Eteria**.
 3. Enter your **Vitesy email and password**.
 4. On success, entities will be created for each device.
 

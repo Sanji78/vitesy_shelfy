@@ -12,7 +12,7 @@ class VitesyDataUpdateCoordinator(DataUpdateCoordinator):
             hass,
             _LOGGER,
             name="vitesy_shelfy",
-            update_interval=timedelta(minutes=1),
+            update_interval=timedelta(minutes=15),
         )
         self.entry = entry
         self.api = api

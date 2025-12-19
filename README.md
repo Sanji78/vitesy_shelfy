@@ -14,7 +14,7 @@ This custom integration logs in to **Vitesy Hub** cloud, pulls device status and
 ## ✨ Features
 
 - Login with your **Vitesy** account (email + password).
-- Pulls devices from the Vitesy Hub API and updates **every minute**.
+- Pulls devices from the Vitesy Hub API and updates **every 15 minutes**.
 - Sensors for:
   - Battery level and charging
   - Wi‑Fi SSID, connection state, model, firmware

@@ -168,7 +168,17 @@ NATEDE_SENSOR_TYPES = extend_shared({
         "unit": UnitOfTemperature.CELSIUS,
         "device_class":  SensorDeviceClass.TEMPERATURE,
     },
+    "TERMSTRTM-N0": {
+        "name": "Temperature",
+        "unit": UnitOfTemperature.CELSIUS,
+        "device_class":  SensorDeviceClass.TEMPERATURE,
+    },
     "SN01HU-N2": {
+        "name": "Humidity",
+        "unit": PERCENTAGE,
+        "device_class": SensorDeviceClass.HUMIDITY
+    },
+    "TGS8101HU-N0": {
         "name": "Humidity",
         "unit": PERCENTAGE,
         "device_class": SensorDeviceClass.HUMIDITY
@@ -178,12 +188,37 @@ NATEDE_SENSOR_TYPES = extend_shared({
         "unit": CONCENTRATION_PARTS_PER_MILLION,
         "device_class": SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS
     },
+    "TGS2602VA-N0": {
+        "name": "VOC",
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
+        "device_class": SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS
+    },
+    "TGS8101VD-N0": {
+        "name": "VOC",
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
+        "device_class": SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS
+    },
     "SN02C2-N2": {
         "name": "CO2",
         "unit": CONCENTRATION_PARTS_PER_MILLION,
         "device_class": SensorDeviceClass.CO2
     },
+    "CDM7160C2-N0": {
+        "name": "CO2",
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
+        "device_class": SensorDeviceClass.CO2
+    },
+    "TGS5141CO-N0": {
+        "name": "CO",
+        "unit": CONCENTRATION_PARTS_PER_MILLION,
+        "device_class": SensorDeviceClass.CO
+    },
     "SY01DS-N2": {
+        "name": "PM2.5",
+        "unit": CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
+        "device_class": SensorDeviceClass.PM25
+    },
+    "PDSM010DS-N0": {
         "name": "PM2.5",
         "unit": CONCENTRATION_MICROGRAMS_PER_CUBIC_METER,
         "device_class": SensorDeviceClass.PM25

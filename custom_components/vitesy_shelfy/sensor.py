@@ -289,6 +289,29 @@ async def async_setup_entry(hass, entry, async_add_entities):
                 if sensor_id in sensor_types:
                     entities.append(VitesySensor(coordinator, device_id, device_type, sensor_id, sensor_types))
 
+        # Diagnostic: which measurement/sensor ids does the API return for this device?
+        _LOGGER.debug(
+            "Vitesy device %s (%s): measurements=%s, latest keys=%s, sensors_data ids=%s, door sensors expected=%s",
+            device_id,
+            device_type,
+            len(device.get("measurements", []) or []),
+            list((device.get("measurements") or [{}])[0].keys()),
+            sorted({s.get("id") for m in (device.get("measurements") or []) for s in m.get("sensors_data", [])}),
+            [k for k in ("DOC-SY", "DOT-SY") if k in sensor_types],
+        )
+
+        # Shelfy: always create the door sensors, even if the latest measurement does not report them yet
+        if sensor_types is SHELFY_SENSOR_TYPES:
+            for door_key in ("DOC-SY", "DOT-SY"):
+                if not any(e.sensor_type == door_key and e.device_id == device_id for e in entities):
+                    entities.append(VitesySensor(coordinator, device_id, device_type, door_key, sensor_types))
+
+        _LOGGER.debug(
+            "Vitesy door raw data for %s: %s",
+            device_id,
+            [s for m in (device.get("measurements") or []) for s in m.get("sensors_data", []) if s.get("id") in ("DOC-SY", "DOT-SY")],
+        )
+
         #  Add from maintenance
         for maintenance_key in device.get("maintenance", {}):
             if maintenance_key in sensor_types:
